@@ -552,42 +552,42 @@ def create_background(
     return background, xmin, ymin, xmax, ymax, dx, dy
 
 
-def draw_text(params: Dict[str, dict], background: BaseGeometry) -> None:
-    """
-    Draw text with content and matplotlib style parameters specified by 'params' dictionary.
-    params['text'] should contain the message to be drawn
+# def draw_text(params: Dict[str, dict], background: BaseGeometry) -> None:
+#     """
+#     Draw text with content and matplotlib style parameters specified by 'params' dictionary.
+#     params['text'] should contain the message to be drawn
 
-    Args:
-        params (Dict[str, dict]): matplotlib style parameters for drawing text. params['text'] should contain the message to be drawn.
-        background (BaseGeometry): Background layer
-    """
-    # Override default osm_credit dict with provided parameters
-    params = override_params(
-        dict(
-            text="\n".join(
-                [
-                    "data © OpenStreetMap contributors",
-                    "github.com/marceloprates/prettymaps",
-                ]
-            ),
-            x=0,
-            y=1,
-            horizontalalignment="left",
-            verticalalignment="top",
-            bbox=dict(boxstyle="square", fc="#fff", ec="#000"),
-            fontfamily="Ubuntu Mono",
-        ),
-        params,
-    )
-    x, y, text = [params.pop(k) for k in ["x", "y", "text"]]
+#     Args:
+#         params (Dict[str, dict]): matplotlib style parameters for drawing text. params['text'] should contain the message to be drawn.
+#         background (BaseGeometry): Background layer
+#     """
+#     # Override default osm_credit dict with provided parameters
+#     params = override_params(
+#         dict(
+#             text="\n".join(
+#                 [
+#                     "data © OpenStreetMap contributors",
+#                     "github.com/marceloprates/prettymaps",
+#                 ]
+#             ),
+#             x=0,
+#             y=1,
+#             horizontalalignment="left",
+#             verticalalignment="top",
+#             bbox=dict(boxstyle="square", fc="#fff", ec="#000"),
+#             fontfamily="Ubuntu Mono",
+#         ),
+#         params,
+#     )
+#     x, y, text = [params.pop(k) for k in ["x", "y", "text"]]
 
-    # Get background bounds
-    xmin, ymin, xmax, ymax = background.bounds
+#     # Get background bounds
+#     xmin, ymin, xmax, ymax = background.bounds
 
-    x = np.interp([x], [0, 1], [xmin, xmax])[0]
-    y = np.interp([y], [0, 1], [ymin, ymax])[0]
+#     x = np.interp([x], [0, 1], [xmin, xmax])[0]
+#     y = np.interp([y], [0, 1], [ymin, ymax])[0]
 
-    plt.text(x, y, text, **params)
+#     plt.text(x, y, text, **params)
 
 
 def presets_directory():
